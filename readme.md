@@ -130,6 +130,7 @@ A： 共享一个 memoizedState ，共享同一个顺序<br>
 Q： “capture Value”特性是怎么产生的<br>
 A： 每一次 reRender 的时候，都是重新 去执行函数组件了，对于之前已经执行过的函数组件，并不会做任何操作<br>
 <hr>
+
 ## 真正的 React 实现<br>
 虽然我们用数组基本实现了一个可用的 Hooks ，了解Hooks 原理，但是在 react中。实现方式却有一些差异的<br>
 ● React中是通过类似单链表的形式来代替数组的，通过 next 按顺序串联所有的 hook<br>
