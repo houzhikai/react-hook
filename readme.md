@@ -9,6 +9,7 @@
 直接进入hooks 的学习
 useState
 1.最简单的useState 用法是这样的
+```
 function Counter() {
         const [count, setCount] = useState(0)
     
@@ -19,6 +20,7 @@ function Counter() {
       </div>
     )
 }
+```
 2.基于 useState 的用法，我们尝试自己实现一个 useState
 function useState(initialValue) {
     const state = initialValue
@@ -77,6 +79,7 @@ count he username 永远是相等的，因为他们共用了一个 state ，并�
 1. 初次渲染的时候，按照 useState ，useEffect的顺序，把state ，deps等顺序塞到 memoizedState数组中
 2. 更新时，按照顺序，从 memoIzedState 中把上次记录的值拿出来
 3. 如果还是不清楚，可以看下面的图
+```
 let memoizedState = []; // hooks 存放在这个数组
 let cursor = 0; // 当前 memoizedState 下标
 function useState(initialValue) {
@@ -100,6 +103,7 @@ function useEffect(callback, depArray) {
   }
   cursor++;
 }
+```
 也可以用图来描述 memoizedState 及cursor变化的过程
 图
 到这里，我们实现了一个可以任意复用的 useState 和useEffect
@@ -113,6 +117,7 @@ A： 每一次 reRender 的时候，都是重新 去执行函数组件了，对�
 真正的 React 实现
 虽然我们用数组基本实现了一个可用的 Hooks ，了解Hooks 原理，但是在 react中。实现方式却有一些差异的
 ● React中是通过类似单链表的形式来代替数组的，通过 next 按顺序串联所有的 hook
+```
 type Hooks = {
          memoizedState: any,                           //指向当前渲染节点 Fiber
              baseState: Update<any> | null,                // 初始化 initialSate， 已经每次dispatch 之后 newState
@@ -127,3 +132,4 @@ type Effect = {
        deps: Array<mixed> | null,
        next: Effect,                                //同上
 }
+```
